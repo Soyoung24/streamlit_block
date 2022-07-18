@@ -98,20 +98,27 @@ if st.button("Camera"):
     if picture:
          st.image(picture, caption='Input Image', use_column_width=True)
          uploaded_file = picture
-else:    
+         image = Image.open(uploaded_file)
+
+         st.image(uploaded_file, caption='Input Image', use_column_width=True)
+         # st.write(os.listdir())
+         answer = inference(uploaded_file)
+         st.write(f"패턴: {answer}")
+
+else:
     uploaded_file = st.file_uploader("Choose an image...")
 
-if uploaded_file is not None:
-    # src_image = load_image(uploaded_file)
-    image = Image.open(uploaded_file)
+    if uploaded_file is not None:
+        # src_image = load_image(uploaded_file)
+        image = Image.open(uploaded_file)
 
-    st.image(uploaded_file, caption='Input Image', use_column_width=True)
-    # st.write(os.listdir())
+        st.image(uploaded_file, caption='Input Image', use_column_width=True)
+        # st.write(os.listdir())
 
 
-    answer = inference(uploaded_file)
+        answer = inference(uploaded_file)
 
-    st.write(f"패턴: {answer}")
+        st.write(f"패턴: {answer}")
 
 
 
