@@ -89,7 +89,7 @@ def inference(image_filename):
 st.title('블록 패턴 추출')
 model = load_model()
 
-st.subheader('카메라로 직접 블록구조를 촬영하실 수 있습니다.')
+st.markdown('↓↓↓ 카메라로 직접 블록구조를 촬영하실 수 있습니다.')
 
 picture = False
 if st.button("Camera"):
