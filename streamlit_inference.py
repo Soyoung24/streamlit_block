@@ -211,9 +211,8 @@ def inference(image_filename):
     heatmaps.append(heatmap)
     results.append(result)
     
-    grid_image = make_grid(images, nrow=num_label+2)
-
     images.extend([image.cpu().squeeze()] + results)
+    grid_image = make_grid(images, nrow=num_label+2)
     
     return onehot2abc(np.array(preds)) , grid_image
 
