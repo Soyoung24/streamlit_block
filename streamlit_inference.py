@@ -1,4 +1,4 @@
-# import torch
+import torch
 from torchvision import transforms
 from PIL import Image
 import streamlit as st
