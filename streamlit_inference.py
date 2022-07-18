@@ -213,9 +213,10 @@ def inference(image_filename):
     
     grid_image = make_grid(images, nrow=num_label+2)
 
-    images.extend([image.cpu().squeeze()] + results), grid_image
+    images.extend([image.cpu().squeeze()] + results)
+    
+    return onehot2abc(np.array(preds)) , grid_image
 
-    return onehot2abc(np.array(preds))
 
     
     
