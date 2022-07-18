@@ -4,3 +4,4 @@ Pillow==9.0.1
 numpy
 efficientnet-pytorch==0.7.1
 pytorch-gradcam==0.2.1
+opencv-python==4.5.5.62
