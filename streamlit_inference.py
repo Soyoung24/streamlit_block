@@ -93,7 +93,7 @@ st.markdown('↓↓↓ 카메라로 직접 블록구조를 촬영하실 수 있�
 
 if st.button("📸 Camera"):
     picture = st.camera_input("Take a picture")
-
+    st.image(picture)
     if picture:
         uploaded_file = picture
         #image = Image.open(uploaded_file)
