@@ -62,9 +62,9 @@ def load_model():
     model = EfficientNet.from_pretrained(model_name, num_classes=num_classes)
 
     weights_path = 'best_model_eff3_v=t.pt'
-    state_dict = torch.load(weights_path) # , map_location=device)  # load weight
-    model.load(state_dict)
-    #model.load_state_dict(state_dict, strict=False)  # insert weight to model structure
+    state_dict = torch.load(weights_path, map_location='cpu') # , map_location=device)  # load weight
+    #model.load(state_dict)
+    model.load_state_dict(state_dict, strict=False)  # insert weight to model structure
     #model = model.to(device)
     return model
 
