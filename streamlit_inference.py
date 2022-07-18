@@ -89,32 +89,25 @@ def inference(image_filename):
 st.title('블록 패턴 추출')
 model = load_model()
 
-st.markdown('↓↓↓ 카메라로 직접 블록구조를 촬영하실 수 있습니다.')
+st.markdown('📸 카메라로 직접 블록구조를 촬영하실 수 있습니다.')
 
-if st.button("📸 Camera"):
-    picture = st.camera_input("Take a picture")
-    st.image(picture)
-    if picture:
-        uploaded_file = picture
-        #image = Image.open(uploaded_file)
-        st.image(uploaded_file, caption='Input Image', use_column_width=True)
-        # st.write(os.listdir())
-        answer = inference(uploaded_file)
-        st.write(f"패턴: {answer}")
+picture = st.camera_input("Take a picture")
 
-else:
-    uploaded_file = st.file_uploader("Choose an image...")
+uploaded_file = st.file_uploader("Choose an image...")
 
-    if uploaded_file is not None:
-        # src_image = load_image(uploaded_file)
-        
-        st.image(uploaded_file, caption='Input Image', use_column_width=True)
-        # st.write(os.listdir())
+if picture:
+    uploaded_file = picture
+
+if uploaded_file is not None:
+    # src_image = load_image(uploaded_file)
+
+    st.image(uploaded_file, caption='Input Image', use_column_width=True)
+    # st.write(os.listdir())
 
 
-        answer = inference(uploaded_file)
+    answer = inference(uploaded_file)
 
-        st.write(f"패턴: {answer}")
+    st.write(f"패턴: {answer}")
 
 
 
