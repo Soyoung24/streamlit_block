@@ -95,12 +95,11 @@ picture = False
 if st.button("Camera"):
     picture = st.camera_input("Take a picture")
     
-if picture:
-     st.image(picture)
-     uploaded_file = picture
-
-    
-uploaded_file = st.file_uploader("Choose an image...")
+    if picture:
+         st.image(picture, caption='Input Image', use_column_width=True)
+         uploaded_file = picture
+else:    
+    uploaded_file = st.file_uploader("Choose an image...")
 
 if uploaded_file is not None:
     # src_image = load_image(uploaded_file)
