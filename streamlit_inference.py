@@ -89,7 +89,16 @@ def inference(image_filename):
 st.title('블록 패턴 추출')
 model = load_model()
 
-uploaded_file = st.file_uploader("Choose an image...")
+st.subheader('카메라로 직접 블록구조를 촬영하실 수 있습니다.')
+
+if st.button("Camera"):
+    picture = st.camera_input("Take a picture")
+    
+if picture:
+     st.image(picture)
+     uploaded_file = picture
+else:
+    uploaded_file = st.file_uploader("Choose an image...")
 
 if uploaded_file is not None:
     # src_image = load_image(uploaded_file)
