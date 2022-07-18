@@ -247,7 +247,7 @@ if uploaded_file is not None:
     st.write(f"패턴: {answer}")
 
     if st.button("GradCAM"):
-        st.image(np.transpose(grid_image.numpy(), (1,2,0))
+        st.image(np.transpose(grid_image.numpy(), (1,2,0)))
 
 
 
