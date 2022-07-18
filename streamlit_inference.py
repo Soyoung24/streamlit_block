@@ -91,6 +91,7 @@ model = load_model()
 
 st.subheader('카메라로 직접 블록구조를 촬영하실 수 있습니다.')
 
+picture = False
 if st.button("Camera"):
     picture = st.camera_input("Take a picture")
     
