@@ -249,6 +249,8 @@ def inference(image_filename):
     
 st.title('블록 패턴 추출')
 model = load_model()
+reg_model = load_reg_model()
+
 
 target_layer = model._blocks[25]
 gradcam = GradCAM(model, target_layer)
