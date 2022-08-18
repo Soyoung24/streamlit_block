@@ -69,18 +69,40 @@ def load_model():
     return model
 
 
-def inference(image_filename):
+@st.cache
+def load_reg_model():
+    model_name = 'efficientnet-b3'  
+    save_model_name = 'eff-b3'
+    num_classes = 1
+    reg_model = EfficientNet.from_pretrained(model_name, num_classes=num_classes)
+
+
+    weights_path = 'best_model_reg_3.pt'
+    state_dict = torch.load(weights_path, map_location=device)  # load weight
+    reg_model.load_state_dict(state_dict, strict=False)  # insert weight to model structure
+
+
+    reg_model = reg_model.to(device)
+    return reg_model
+
+
+
+def model_inference(image_filename):
     image = image_loader(image_filename)
     #imshow(image.cpu().squeeze())
     model.eval()
+    reg_model.eval()
     # since we're not training, we don't need to calculate the gradients for our outputs
     with torch.no_grad():
         inputs = image #.to(device)
         outputs = model(inputs)
         preds = [1 if x > 0.5 else 0 for x in
                  outputs.squeeze().tolist()]  # the class with the highest energy is what we choose as prediction
+        reg_outputs = reg_model(inputs)
+        predicted = torch.round(reg_outputs).int()
+        predicted = predicted.squeeze()
         
-    return onehot2abc(np.array(preds))
+    return onehot2abc(np.array(preds)), predicted
 
 
 # GradCAM
@@ -185,12 +207,18 @@ def inference(image_filename):
     image = image_loader(image_filename)
     #imshow(image.cpu().squeeze())
     model.eval()
+    reg_model.eval()
     # since we're not training, we don't need to calculate the gradients for our outputs
     with torch.no_grad():
         inputs = image #.to(device)
         outputs = model(inputs)
         preds = [1 if x > 0.5 else 0 for x in
                  outputs.squeeze().tolist()]  # the class with the highest energy is what we choose as prediction
+        
+        reg_outputs = reg_model(inputs)
+        predicted = torch.round(reg_outputs).int()
+        predicted = predicted.squeeze()
+
     masks = []
     heatmaps = []
     results = []    
@@ -214,7 +242,7 @@ def inference(image_filename):
     images.extend([image.cpu().squeeze()] + results)
     grid_image = make_grid(images, nrow=num_label+2)
     
-    return onehot2abc(np.array(preds)) , grid_image
+    return onehot2abc(np.array(preds)) , grid_image, predicted
 
 
     
@@ -242,9 +270,9 @@ if uploaded_file is not None:
     # st.write(os.listdir())
 
 
-    answer, grid_image = inference(uploaded_file)
+    answer, grid_image, count_block = inference(uploaded_file)
 
-    st.write(f"패턴: {answer}")
+    st.write(f"패턴: {answer}, 블럭 개수: {count_block}개")
 
     if st.button("GradCAM"):
         st.image(np.transpose(grid_image.numpy(), (1,2,0)), clamp=True)
