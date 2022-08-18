@@ -73,18 +73,18 @@ def load_model():
 def load_reg_model():
     from efficientnet_pytorch import EfficientNet
 
-    model_name = 'efficientnet-b3'  
-    save_model_name = 'eff-b3'
+    reg_model_name = 'efficientnet-b3'  
+    reg_save_model_name = 'eff-b3'
     num_classes = 1
-    reg_model = EfficientNet.from_pretrained(model_name, num_classes=num_classes)
+    reg_model = EfficientNet.from_pretrained(reg_model_name, num_classes=num_classes)
 
 
-    weights_path = 'best_model_reg_3.pt'
-    state_dict = torch.load(weights_path, map_location=device)  # load weight
+    reg_weights_path = 'best_model_reg_3.pt'
+    state_dict = torch.load(reg_weights_path, map_location='cpu')  # load weight
     reg_model.load_state_dict(state_dict, strict=False)  # insert weight to model structure
 
 
-    reg_model = reg_model.to(device)
+#     reg_model = reg_model.to(device)
     return reg_model
 
 
