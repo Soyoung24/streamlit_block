@@ -71,6 +71,8 @@ def load_model():
 
 @st.cache
 def load_reg_model():
+    from efficientnet_pytorch import EfficientNet
+
     model_name = 'efficientnet-b3'  
     save_model_name = 'eff-b3'
     num_classes = 1
