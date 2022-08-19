@@ -61,7 +61,8 @@ def load_model():
     num_classes = 10
     model = EfficientNet.from_pretrained(model_name, num_classes=num_classes)
 
-    weights_path = 'best_model_eff3_v=t.pt'
+    #weights_path = 'best_model_eff3_v=t.pt'
+    weights_path = 'best_model_cls_all.pt'
     state_dict = torch.load(weights_path, map_location='cpu') # , map_location=device)  # load weight
     #model.load(state_dict)
     model.load_state_dict(state_dict, strict=False)  # insert weight to model structure
@@ -79,7 +80,8 @@ def load_reg_model():
     reg_model = EfficientNet.from_pretrained(reg_model_name, num_classes=num_classes)
 
 
-    reg_weights_path = 'best_model_reg_3.pt'
+    #reg_weights_path = 'best_model_reg_3.pt'
+    reg_weights_path = 'best_model_reg_all.pt'
     state_dict = torch.load(reg_weights_path, map_location='cpu')  # load weight
     reg_model.load_state_dict(state_dict, strict=False)  # insert weight to model structure
 
