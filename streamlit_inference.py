@@ -266,6 +266,19 @@ picture = st.camera_input("Take a picture")
 
 uploaded_file = st.file_uploader("Choose an image...")
 
+option = st.selectbox(
+     '샘플 사진으로 테스트해보세요.',
+     ('AF', 'ABCG', 'CDEFI'))
+
+st.write('You selected:', option)
+
+if option =='AF':
+    uploaded_file = 'sample/02_AF_N05_02.JPG'
+if option =='ABCG':
+    uploaded_file = 'sample/04_ABCG_N11_11.JPG'
+if option =='CDEFI':
+    uploaded_file = 'sample/05_CDEFI_N17_04.JPG'
+
 if picture:
     uploaded_file = picture
 
