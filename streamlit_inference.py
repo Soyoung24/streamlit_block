@@ -264,13 +264,15 @@ st.markdown('📸 카메라로 직접 블록구조를 촬영하실 수 있습니
 
 picture = st.camera_input("Take a picture")
 
-uploaded_file2 = st.file_uploader("Choose an image...")
+# uploaded_file = st.file_uploader("Choose an image...")
 
 option = st.selectbox(
      '샘플 사진으로 테스트해보세요.',
      ('AF', 'ABCG', 'CDEFI'))
 
 st.write('You selected:', option)
+
+uploaded_file = st.file_uploader("Choose an image...")
 
 if option =='AF':
     uploaded_file = 'sample/02_AF_N05_02.JPG'
@@ -282,14 +284,15 @@ if option =='CDEFI':
 if picture:
     uploaded_file = picture
 
-if uploaded_file2 is not None:
+    
+if uploaded_file is not None:
     # src_image = load_image(uploaded_file)
 
-    st.image(uploaded_file2, caption='Input Image', use_column_width=True)
+    st.image(uploaded_file, caption='Input Image', use_column_width=True)
     # st.write(os.listdir())
 
 
-    answer, grid_image, count_block = inference(uploaded_file2)
+    answer, grid_image, count_block = inference(uploaded_file)
 
     st.write(f"패턴: {answer}, 블럭 개수: {count_block}개")
 
