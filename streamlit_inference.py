@@ -272,7 +272,6 @@ option = st.selectbox(
 
 st.write('You selected:', option)
 
-uploaded_file = st.file_uploader("Choose an image...")
 
 if option =='AF':
     uploaded_file = 'sample/02_AF_N05_02.JPG'
@@ -283,6 +282,8 @@ if option =='CDEFI':
 
 if picture:
     uploaded_file = picture
+
+uploaded_file = st.file_uploader("Choose an image...")
 
     
 if uploaded_file is not None:
