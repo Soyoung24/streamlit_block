@@ -273,6 +273,8 @@ option = st.selectbox(
 st.write('You selected:', option)
 
 
+if option == '선택하세요':
+    uploaded_file = None
 if option =='AF':
     uploaded_file = 'sample/02_AF_N05_02.JPG'
 if option =='ABCG':
@@ -282,6 +284,9 @@ if option =='CDEFI':
 
 if picture:
     uploaded_file = picture
+
+elif option != '선택하세요':
+    uploaded_file = uploaded_file
     
 else:
     uploaded_file = st.file_uploader("Choose an image...")
