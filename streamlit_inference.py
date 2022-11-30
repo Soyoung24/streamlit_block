@@ -268,7 +268,7 @@ picture = st.camera_input("Take a picture")
 
 option = st.selectbox(
      '샘플 사진으로 테스트해보세요.',
-     ('AF', 'ABCG', 'CDEFI'))
+     ('선택하세요', 'AF', 'ABCG', 'CDEFI'))
 
 st.write('You selected:', option)
 
